@@ -3,10 +3,7 @@ import streamlit as st
 import pandas as pd
 
 file_path = 'diabetes_model.sav'
-data= pd.read_sav
-
 file_path2 = 'diabetes.csv'
-data2 = pd.read_csv
 
 # Membaca Model
 diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
