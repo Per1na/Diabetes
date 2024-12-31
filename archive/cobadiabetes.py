@@ -1,52 +1,32 @@
-import pickle
 import streamlit as st
+import pickle
 import pandas as pd
 
-file_path = 'diabetes_model.sav'
-file_path2 = 'diabetes.csv'
+# Load Model
+MODEL_PATH = 'archive/diabetes_model.sav'
+with open(MODEL_PATH, 'rb') as file:
+    diabetes_model = pickle.load(file)
 
-# Membaca Model
-diabetes_model = pickle.load(open('diabetes_model.sav','rb'))
+# Streamlit App
+st.title("Prediksi Diabetes dengan Machine Learning")
+st.write("Masukkan informasi berikut untuk memprediksi risiko diabetes:")
 
-# Judul Web
-st.title('Data Mining Prediksi Diabetes')
+# Input data dari pengguna
+pregnancies = st.number_input('Masukkan Jumlah Kehamilan', min_value=0, step=1)
+glucose = st.number_input('Masukkan Nilai Glukosa')
+blood_pressure = st.number_input('Masukkan Nilai Tekanan Darah')
+skin_thickness = st.number_input('Masukkan Ketebalan Kulit')
+insulin = st.number_input('Masukkan Nilai Insulin')
+bmi = st.number_input('Masukkan Indeks Massa Tubuh (BMI)')
+dpf = st.number_input('Masukkan Diabetes Pedigree Function')
+age = st.number_input('Masukkan Usia')
 
-# Membagi Kolom
-col1, col2 = st.columns(2)
-
-with col1 :
-    Pregnancies = st.number_input('Input Nilai Pregnancies')
-
-with col2 :
-    Glucose = st.number_input('Input Nilai Glucose')
-
-with col1 :
-    BloodPressure = st.number_input('Input Nilai Blood Pressure')
-
-with col2 :
-    SkinThickness = st.number_input('Input Nilai Skin Thickness')
-
-with col1 :
-    Insulin = st.number_input('input Nilai Insulin')
-
-with col2 :
-    BMI = st.number_input('Input Nilai BMI')
-
-with col1 :
-    DiabetesPedigreeFunction = st.number_input('Input Nilai Diabetes Pedigree Function')
-
-with col2 :
-    Age = st.number_input('Input Nilai Age')
-
-# Code untuk Prediksi
-diab_diagnosis = ''
-
-# Membuat Tombol untuk Prediksi
-if st.button('Test Prediksi Diabetes') :
-    diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-    if(diab_prediction[0] == 1):
-        diab_diagnosis = 'Pasien terkena Diabetes'
-    else :
-        diab_diagnosis = 'Pasien tidak terkena Diabetes'
-
-    st.success(diab_diagnosis)
+# Prediksi
+if st.button("Prediksi Diabetes"):
+    # Format input ke dalam array untuk model
+    input_data = [[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, dpf, age]]
+    prediction = diabetes_model.predict(input_data)
+    if prediction[0] == 1:
+        st.error("Hasil: Risiko Diabetes")
+    else:
+        st.success("Hasil: Tidak Berisiko Diabetes")
