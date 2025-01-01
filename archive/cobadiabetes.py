@@ -12,7 +12,7 @@ st.title("Prediksi Diabetes dengan Machine Learning")
 st.write("Masukkan informasi berikut untuk memprediksi risiko diabetes:")
 
 # Input data dari pengguna
-pregnancies = st.number_input('Masukkan Jumlah Kehamilan', min_value=0, step=1)
+pregnancies = st.number_input('Masukkan Jumlah Kehamilan')
 glucose = st.number_input('Masukkan Nilai Glukosa')
 blood_pressure = st.number_input('Masukkan Nilai Tekanan Darah')
 skin_thickness = st.number_input('Masukkan Ketebalan Kulit')
