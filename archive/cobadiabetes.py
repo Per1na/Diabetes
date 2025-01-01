@@ -26,7 +26,7 @@ if st.button("Prediksi Diabetes"):
     # Format input ke dalam array untuk model
     input_data = [[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, dpf, age]]
     prediction = diabetes_model.predict(input_data)
-    if prediction[0] == 0:
+    if prediction[0] == 1:
         st.error("Hasil: Risiko Diabetes")
     else:
         st.success("Hasil: Tidak Berisiko Diabetes")
