@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import numpy as np  # Tambahkan numpy di sini
 
 # Load Model
 MODEL_PATH = 'archive/diabetes_model.sav'
@@ -24,7 +25,7 @@ age = st.number_input('Masukkan Usia')
 # Prediksi
 if st.button("Prediksi Diabetes"):
     # Format input ke dalam array untuk model
-    input_data = [[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, dpf, age]]
+    input_data = np.array([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, dpf, age]])
     prediction = diabetes_model.predict(input_data)
     if prediction[0] == 1:
         st.error("Hasil: Risiko Diabetes")
