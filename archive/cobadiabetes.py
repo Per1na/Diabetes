@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np  # Tambahkan numpy di sini
 
 # Load Model
-MODEL_PATH = 'diabetes_model.sav'
+MODEL_PATH = 'archive/diabetes_model.sav'
 with open(MODEL_PATH, 'rb') as file:
     diabetes_model = pickle.load(file)
 
